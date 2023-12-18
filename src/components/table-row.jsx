@@ -1,19 +1,15 @@
 import {useState, useEffect} from 'react'
 
 export default function TableRow(props) {
-  const [isChecked, setIsChecked] = useState(false);
+  const onClickHandler = (e) => {
+    const checked = e.target.checked;
 
-  const onClickHandler = () => {
-    setIsChecked(!isChecked);
-  }
-
-  useEffect(() => {
-    if(isChecked) {
+    if(checked) {
       props.incrementHandler();
     } else {
       props.decrementHandler();
     }
-  }, [isChecked]);
+  }
 
   return (
     <>
@@ -21,7 +17,6 @@ export default function TableRow(props) {
         <td><input
           type="checkbox"
           onClick={onClickHandler}
-          checked={isChecked}
         /></td>
         <td>{props.data.name}</td>
         <td>{props.data.device}</td>
