@@ -2,22 +2,33 @@
 import itemData from '../data/item-data'
 // import MasterCheckbox from '/components/MasterCheckbox'
 // import CheckboxCounter from '/components/CheckboxCounter'
-import ListItem from './components/list-item'
+import TableRow from './components/table-row'
 import './styles/reset.css'
 import './App.css'
 
 function App() {
-  const itemList = itemData.map((item, index) => {
+  const tableRows = itemData.map((item, index) => {
     return (
-      <ListItem data={item} key={`item-${index}`} />
+      <TableRow data={item} key={`item-${index}`} />
     )
   });
 
   return (
     <>
-      <ul>
-        {itemList}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Device</th>
+            <th>Path</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableRows}
+        </tbody>
+      </table>
     </>
   )
 }
