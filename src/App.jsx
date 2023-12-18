@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import items from '../data/items.js'
-import MasterCheckbox from '/components/MasterCheckbox.js'
-import CheckboxCounter from '/components/CheckboxCounter.js'
+// import { useState } from 'react'
+import itemData from '../data/item-data'
+// import MasterCheckbox from '/components/MasterCheckbox'
+// import CheckboxCounter from '/components/CheckboxCounter'
+import ListItem from './components/list-item'
+import './styles/reset.css'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  const itemList = items.map((item, index) => {
-    <Item data={item} key={`item-${index}`} />
+  const itemList = itemData.map((item, index) => {
+    return (
+      <ListItem data={item} key={`item-${index}`} />
+    )
   });
 
   return (
     <>
-      <MasterCheckbox />
-      <CheckboxCounter />
       <ul>
         {itemList}
       </ul>

@@ -1,4 +1,4 @@
-export const items = [
+const itemData = [
   {
     name: 'smss.exe',
     device: 'Stark',
@@ -29,4 +29,6 @@ export const items = [
     path: '\\Device\\HarddiskVolume1\\temp\\7za.exe',
     status: 'scheduled'
   }
-]
+];
+
+export default itemData;
