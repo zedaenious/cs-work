@@ -5,7 +5,7 @@ body {
   max-width: 1600px;
   margin: 0 auto;
   padding: 100px;
-  min-height: auto;
+  min-height: 0!important; /* overriding browser user agent to bypass 100vh chrome standard */
 }
 
 table {
@@ -69,4 +69,13 @@ table tbody td {
 
 #controls button:disabled {
   color: gray;
+}
+
+.greenDot {
+  height: 12px;
+  width: 12px;
+  margin-right: 10px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
 }
