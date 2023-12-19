@@ -1,4 +1,3 @@
-// import './styles/reset.css'
 import './styles/App.css'
 import itemData from '../data/item-data'
 import { useState, useEffect } from 'react'
