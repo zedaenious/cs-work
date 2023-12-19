@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import itemData from '../data/item-data'
-// import MasterCheckbox from './components/MasterCheckbox'
+// import MasterCheckbox from './components/master-checkbox'
 import CheckboxCounter from './components/checkbox-counter'
 import TableRow from './components/table-row'
 import './styles/reset.css'
@@ -16,6 +16,32 @@ function App() {
   function decrementCounter() {
     setCounter(counter - 1)
   };
+
+  useEffect(() => {
+    const el = document.querySelector('#master-checkbox');
+
+    if(counter === 0) {
+      el.checked = false;
+      el.indeterminate = false;
+    }
+    if(counter > 0 && counter < itemData.length) {
+      el.checked = false;
+      el.indeterminate = true;
+    }
+    if(counter === itemData.length) {
+      el.checked = true;
+      el.indeterminate = false;
+    }
+  }, [counter])
+
+  function onMasterClickHandler() {
+    const el = document.querySelector('#master-checkbox');
+    const cboxes = document.querySelectorAll('tbody input');
+
+    cboxes.forEach((cbox) => {
+      cbox.checked = el.checked;
+    });
+  }
   
   const tableRows = itemData.map((item, index) => {
     return (
@@ -30,7 +56,13 @@ function App() {
 
   return (
     <>
-      <CheckboxCounter count={counter}/>
+      <input
+        type="checkbox"
+        id="master-checkbox"
+        name="master-checkbox"
+        onClick={onMasterClickHandler}
+      />
+      <CheckboxCounter count={counter} />
       <table>
         <thead>
           <tr>
