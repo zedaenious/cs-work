@@ -1,6 +1,5 @@
-import './styles/reset.css'
+// import './styles/reset.css'
 import './styles/App.css'
-import downloadIcon from './assets/download-icon-sm.jpeg'
 import itemData from '../data/item-data'
 import { useState, useEffect } from 'react'
 import TableRow from './components/table-row'
@@ -56,8 +55,8 @@ function App() {
 
       const cboxData = tr.dataset;
 
-      if(tr.status === 'available') {
-        msg += `Device: ${tr.device} \nPath: ${tr.path}\n\n`
+      if(cboxData.status === 'available') {
+        msg += `Device: ${cboxData.device} \nPath: ${cboxData.path}\n\n`
       }
     });
 
