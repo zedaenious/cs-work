@@ -7,8 +7,10 @@ import './styles/reset.css'
 import './App.css'
 
 function App() {
+  /* STATE */
   const [counter, setCounter] = useState(0);
 
+  /* FUNCTIONS */
   function incrementCounter() {
     setCounter(counter + 1)
   };
@@ -17,6 +19,18 @@ function App() {
     setCounter(counter - 1)
   };
 
+  function onMasterClickHandler() {
+    const el = document.querySelector('#master-checkbox');
+    const cboxes = document.querySelectorAll('tbody input');
+
+    cboxes.forEach((cbox) => {
+      cbox.checked = el.checked;
+    });
+
+    setCounter(el.checked ? itemData.length : 0);
+  }
+
+  /* EFFECTS */
   useEffect(() => {
     const el = document.querySelector('#master-checkbox');
 
@@ -33,16 +47,8 @@ function App() {
       el.indeterminate = false;
     }
   }, [counter])
-
-  function onMasterClickHandler() {
-    const el = document.querySelector('#master-checkbox');
-    const cboxes = document.querySelectorAll('tbody input');
-
-    cboxes.forEach((cbox) => {
-      cbox.checked = el.checked;
-    });
-  }
   
+  /* VARIABLES */
   const tableRows = itemData.map((item, index) => {
     return (
       <TableRow
@@ -54,6 +60,7 @@ function App() {
     )
   });
 
+  /* JSX */
   return (
     <>
       <input
