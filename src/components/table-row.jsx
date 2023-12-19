@@ -13,7 +13,11 @@ export default function TableRow(props) {
 
   return (
     <>
-      <tr>
+      <tr
+        data-status={props.data.status}
+        data-path={props.data.path}
+        data-device={props.data.device}
+      >
         <td><input
           type="checkbox"
           onClick={onClickHandler}

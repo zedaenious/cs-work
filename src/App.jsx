@@ -1,14 +1,26 @@
-import { useState, useEffect } from 'react'
-import itemData from '../data/item-data'
-// import MasterCheckbox from './components/master-checkbox'
-import CheckboxCounter from './components/checkbox-counter'
-import TableRow from './components/table-row'
 import './styles/reset.css'
-import './App.css'
+import './styles/App.css'
+import downloadIcon from './assets/download-icon-sm.jpeg'
+import itemData from '../data/item-data'
+import { useState, useEffect } from 'react'
+import TableRow from './components/table-row'
+import CheckboxCounter from './components/checkbox-counter'
 
 function App() {
   /* STATE */
   const [counter, setCounter] = useState(0);
+
+  /* VARIABLES */
+  const tableRows = itemData.map((item, index) => {
+    return (
+      <TableRow
+        data={item}
+        key={`item-${index}`}
+        incrementHandler={incrementCounter}
+        decrementHandler={decrementCounter}
+      />
+    )
+  });
 
   /* FUNCTIONS */
   function incrementCounter() {
@@ -30,6 +42,28 @@ function App() {
     setCounter(el.checked ? itemData.length : 0);
   }
 
+  function onButtonClickHandler() {
+    const tableRows = document.querySelectorAll('table tbody tr');
+    const available = [];
+    let msg = 'Devices & Path for available items:\n\n';
+    
+    tableRows.forEach((tr) => {
+      const cbox = tr.querySelector('input');
+      
+      if(!cbox.checked) {
+        return;
+      }
+
+      const cboxData = tr.dataset;
+
+      if(tr.status === 'available') {
+        msg += `Device: ${tr.device} \nPath: ${tr.path}\n\n`
+      }
+    });
+
+    alert(msg);
+  }
+
   /* EFFECTS */
   useEffect(() => {
     const el = document.querySelector('#master-checkbox');
@@ -47,29 +81,23 @@ function App() {
       el.indeterminate = false;
     }
   }, [counter])
-  
-  /* VARIABLES */
-  const tableRows = itemData.map((item, index) => {
-    return (
-      <TableRow
-        data={item}
-        key={`item-${index}`}
-        incrementHandler={incrementCounter}
-        decrementHandler={decrementCounter}
-      />
-    )
-  });
 
   /* JSX */
   return (
     <>
-      <input
-        type="checkbox"
-        id="master-checkbox"
-        name="master-checkbox"
-        onClick={onMasterClickHandler}
-      />
-      <CheckboxCounter count={counter} />
+      <div id="controls">
+        <input
+          type="checkbox"
+          id="master-checkbox"
+          name="master-checkbox"
+          onClick={onMasterClickHandler}
+        />
+        <CheckboxCounter count={counter} />
+        <button
+          onClick={onButtonClickHandler}
+          disabled={counter === 0}
+        >Download Selected</button>
+      </div>
       <table>
         <thead>
           <tr>

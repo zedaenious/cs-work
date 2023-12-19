@@ -40,3 +40,28 @@ table thead th {
 table tbody td {
   padding: 10px;
 }
+
+#controls {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  max-width: 500px;
+  margin-bottom: 15px;
+}
+
+#controls button {
+  background-color: white;
+  color: black;
+  font-weight: 700;
+}
+
+#controls button::before {
+  content: url('../assets/download-icon-sm.jpeg');
+  width: 25px;
+  height: 37px;
+  margin-right: 10px;
+}
+
+#controls button:disabled {
+  color: gray;
+}
